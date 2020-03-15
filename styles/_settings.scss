@@ -21,7 +21,7 @@ $line_height: (
   )
 );
 
-$container: 1220px;
+$container: 1320px;
 $gutter: (
   small: (
     23px / map-get($font_size, small) * map-get($font_size, large)// Foundation runs grid units through rem-calc, but I'm using a different base size for small screens

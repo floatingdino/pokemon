@@ -17,10 +17,16 @@ export default function Header() {
       <div className="grid-container h-100">
         <div className="grid-x h-100 align-middle">
           <div className="cell auto">
-            <img src="../assets/img/josephmark-pokemon.png" alt="Josephmark" />
+            <img
+              src="/static/img/josephmark-pokemon.png"
+              alt="Josephmark"
+              width="114"
+              height="32"
+              className="header-logo"
+            />
           </div>
           <div className="cell shrink">
-            <div class="grid-x grid-margin-x align-middle">
+            <div className="grid-x grid-margin-x align-middle">
               <div className="cell auto">
                 <ul className="main-nav grid-x grid-margin-x">
                   {navItems.map(({ link, label }) => (
@@ -33,8 +39,10 @@ export default function Header() {
               <div className="cell shrink user-profile-cell">
                 <div className="user-profile">
                   <img
-                    src="../assets/img/placeholder-user.png"
+                    src="/static/img/placeholder-user.png"
                     alt="Profile Picture"
+                    width="56"
+                    height="56"
                   />
                 </div>
               </div>
