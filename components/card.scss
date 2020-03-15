@@ -28,6 +28,7 @@ $types: (
   border-radius: 10px;
   padding: 23px 18px;
   position: relative;
+  transition: box-shadow 0.3s, transform 0.3s, border 0.3s, padding 0.3s;
   &-holder {
     position: relative;
     padding-top: 85px;
@@ -51,7 +52,13 @@ $types: (
     border-radius: 10px;
     &:focus {
       outline: none;
-      box-shadow: 0 0 2px 5px rgba(s.$active, 0.2);
+      & + .card {
+        box-shadow: 0 0 2px 5px rgba(s.$active, 0.2);
+      }
+    }
+    &:hover + .card {
+      transform: translateY(-3px);
+      box-shadow: s.$deep_shadow;
     }
   }
   &-img {
@@ -97,6 +104,22 @@ $types: (
     line-height: (14 / 12);
     background-color: s.$dark;
     color: white;
+  }
+  &-empty-button {
+    background-color: s.$body;
+    box-shadow: s.$shadow;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px auto 15px;
+    border-radius: 40px;
+    border: 1px solid white;
+    svg {
+      display: block;
+    }
   }
 }
 

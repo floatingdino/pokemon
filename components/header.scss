@@ -2,7 +2,7 @@
 
 header {
   background-color: s.$dark;
-  color: white;
+  color: rgba(white, 0.6);
   height: 80px;
   margin-bottom: 110px;
   img {
@@ -23,6 +23,9 @@ header {
   text-transform: uppercase;
   a {
     padding: 15px 0;
+    &.active {
+      color: white;
+    }
   }
 }
 

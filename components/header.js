@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { withRouter } from "next/router";
 
 import "./header.scss";
 
@@ -13,20 +14,22 @@ const navItems = [
   }
 ];
 
-export default function Header() {
+function Header({ router }) {
   return (
     <header>
       <div className="grid-container h-100">
         <div className="grid-x h-100 align-middle">
           <div className="cell auto">
             <Link href="/">
-              <img
-                src="/static/img/josephmark-pokemon.png"
-                alt="Josephmark"
-                width="114"
-                height="32"
-                className="header-logo"
-              />
+              <a>
+                <img
+                  src="/static/img/josephmark-pokemon.png"
+                  alt="Josephmark"
+                  width="114"
+                  height="32"
+                  className="header-logo"
+                />
+              </a>
             </Link>
           </div>
           <div className="cell shrink">
@@ -36,7 +39,12 @@ export default function Header() {
                   {navItems.map(({ link, label }) => (
                     <li key={link} className="cell shrink">
                       <Link href={link}>
-                        <a>{label}</a>
+                        <a
+                          className={
+                            (router.pathname === link && "active") || null
+                          }>
+                          {label}
+                        </a>
                       </Link>
                     </li>
                   ))}
@@ -59,3 +67,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default withRouter(Header);
