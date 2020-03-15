@@ -29,6 +29,15 @@ $types: (
   padding: 23px 18px;
   position: relative;
   transition: box-shadow 0.3s, transform 0.3s, border 0.3s, padding 0.3s;
+  h2[contenteditable="true"] {
+    display: inline-block;
+    border-bottom: 1px dashed black;
+    &:focus {
+      outline: none;
+      border-color: s.$active;
+      color: s.$active;
+    }
+  }
   &-holder {
     position: relative;
     padding-top: 85px;

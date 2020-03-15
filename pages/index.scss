@@ -1,3 +1,20 @@
+@use "settings" as s;
+
 .pagination-indicator {
   font-size: 24px;
+}
+.scroll-more {
+  font-family: s.$heading_family;
+  font-weight: 700;
+  opacity: 0.6;
+  width: 60px;
+  margin: 0 auto;
+  svg {
+    display: block;
+    fill: currentColor;
+    margin: 10px auto 0;
+  }
+}
+.archive-left-column {
+  min-height: calc(100vh - 300px);
 }

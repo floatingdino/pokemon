@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ContentEditable from "react-contenteditable";
 
 import "./card.scss";
 
@@ -45,7 +46,12 @@ export default function Card({
               </div>
             </div>
             <div className="cell grow">
-              <h2>{name}</h2>
+              <ContentEditable
+                html={name}
+                tagName="h2"
+                disabled={!inParty}
+                spellcheck="false"
+              />
             </div>
             <div className="cell shrink">
               <ul className="card-types mt-0 mb-0">

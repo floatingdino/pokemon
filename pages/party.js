@@ -25,7 +25,9 @@ export default function Party() {
           </div>
           <div className="cell large-6">
             <div className="grid-x grid-margin-x">
-              {selectedPokemon.map(mon => <Card key={mon.id} {...mon} />)}
+              {selectedPokemon.map(mon => (
+                <Card key={mon.id} {...mon} inParty={true} />
+              ))}
             </div>
           </div>
         </div>
