@@ -40,7 +40,8 @@ const pokemon = [
   }
 ];
 
-const max_pokemon = 151;
+const maxPokemon = 151;
+const maxPartySize = 6;
 
 export default class Index extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export default class Index extends Component {
       this.setState({
         active: newActive
       });
-    } else {
+    } else if (this.state.active.length < maxPartySize) {
       this.setState({
         active: [...this.state.active, id]
       });
@@ -90,13 +91,15 @@ export default class Index extends Component {
                   />
                 ))}
                 <div className="cell pagination-indicator text-center">
-                  {pokemon.length}/{max_pokemon}
+                  {pokemon.length}/{maxPokemon}
                 </div>
               </div>
             </div>
             <div className="cell large-1" />
             <div className="cell large-1">
-              <Link href="/party">Party</Link>
+              <Link href="/party">
+                <a>Party</a>
+              </Link>
             </div>
           </div>
         </div>

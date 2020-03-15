@@ -33,7 +33,9 @@ export default function Header() {
                 <ul className="main-nav grid-x grid-margin-x">
                   {navItems.map(({ link, label }) => (
                     <li key={link} className="cell shrink">
-                      <Link href={link}>{label}</Link>
+                      <Link href={link}>
+                        <a>{label}</a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
