@@ -20,13 +20,25 @@ export default function Header() {
             <img src="../assets/img/josephmark-pokemon.png" alt="Josephmark" />
           </div>
           <div className="cell shrink">
-            <ul className="main-nav grid-x grid-margin-x">
-              {navItems.map(({ link, label }) => (
-                <li key={link} className="cell shrink">
-                  <a>{label}</a>
-                </li>
-              ))}
-            </ul>
+            <div class="grid-x grid-margin-x align-middle">
+              <div className="cell auto">
+                <ul className="main-nav grid-x grid-margin-x">
+                  {navItems.map(({ link, label }) => (
+                    <li key={link} className="cell shrink">
+                      <a>{label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="cell shrink user-profile-cell">
+                <div className="user-profile">
+                  <img
+                    src="../assets/img/placeholder-user.png"
+                    alt="Profile Picture"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
