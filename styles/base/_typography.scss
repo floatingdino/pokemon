@@ -8,7 +8,7 @@ html {
   background-attachment: fixed;
   padding: 0;
   margin: 0;
-  background-color: white;
+  background-color: s.$body;
   color: s.$dark;
   @media (prefers-color-scheme: dark) {
     background-color: s.$dark;
@@ -26,7 +26,6 @@ h1,
 h2,
 h3 {
   font-family: s.$heading_family;
-  font-weight: 400;
   font-style: normal;
   text-decoration: none;
   margin-top: 15px;
@@ -36,11 +35,13 @@ h3 {
 h1 {
   font-size: 36px;
   line-height: 1;
+  font-weight: 400;
 }
 
 h2 {
   font-size: (24 / 10) * 1rem;
   line-height: (28 / 24);
+  font-weight: 700;
   @include foundation.breakpoint(large) {
     font-size: (32 / 12) * 1rem;
     line-height: (37 / 32);

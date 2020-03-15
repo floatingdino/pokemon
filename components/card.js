@@ -1,8 +1,18 @@
 import "./card.scss";
 
+const defaultImage = "/static/img/placeholder-ball.png";
+
 // TODO: Image
 
-export default function Card({ id, name, types, active, inParty, onClick }) {
+export default function Card({
+  id,
+  name,
+  types,
+  active,
+  inParty,
+  onClick,
+  image
+}) {
   return (
     <article className="cell large-4 text-center card-holder">
       {onClick && (
@@ -18,7 +28,7 @@ export default function Card({ id, name, types, active, inParty, onClick }) {
         <div className="cell shrink">
           <img
             className="card-img"
-            src=""
+            src={image || defaultImage}
             alt={name}
             width="150"
             height="150"

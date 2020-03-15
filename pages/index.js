@@ -5,6 +5,7 @@ import "./index.scss";
 
 import Layout from "../components/layout";
 import Card from "../components/card";
+import PartySidebar from "../components/party-sidebar";
 
 // TODO: load from API (paged)
 const pokemon = [
@@ -39,6 +40,11 @@ const pokemon = [
     types: ["Fire", "Flying"]
   }
 ];
+
+const getPokemonByID = id => {
+  const [pkmn] = pokemon.filter(mon => mon.id === id);
+  return pkmn;
+};
 
 const maxPokemon = 151;
 const maxPartySize = 6;
@@ -96,6 +102,7 @@ export default class Index extends Component {
   }
 
   render() {
+    const { active } = this.state;
     return (
       <Layout>
         <div className="grid-container">
@@ -114,7 +121,7 @@ export default class Index extends Component {
                   <Card
                     key={mon.id}
                     {...mon}
-                    active={this.state.active.indexOf(mon.id) >= 0}
+                    active={active.indexOf(mon.id) >= 0}
                     onClick={() => this.toggleCardActive(mon.id)}
                   />
                 ))}
@@ -127,9 +134,10 @@ export default class Index extends Component {
             </div>
             <div className="cell large-1" />
             <div className="cell large-1">
-              <Link href="/party">
-                <a>Party</a>
-              </Link>
+              <PartySidebar
+                pokemon={active.map(id => getPokemonByID(id))}
+                max={maxPartySize}
+              />
             </div>
           </div>
         </div>

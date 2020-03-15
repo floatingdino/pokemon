@@ -19,13 +19,15 @@ export default function Header() {
       <div className="grid-container h-100">
         <div className="grid-x h-100 align-middle">
           <div className="cell auto">
-            <img
-              src="/static/img/josephmark-pokemon.png"
-              alt="Josephmark"
-              width="114"
-              height="32"
-              className="header-logo"
-            />
+            <Link href="/">
+              <img
+                src="/static/img/josephmark-pokemon.png"
+                alt="Josephmark"
+                width="114"
+                height="32"
+                className="header-logo"
+              />
+            </Link>
           </div>
           <div className="cell shrink">
             <div className="grid-x grid-margin-x align-middle">
