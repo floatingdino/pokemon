@@ -1,6 +1,13 @@
 @use "sass:color";
 
-$font_family: serif;
+// Colours
+
+$mine: #333;
+
+$dark: $mine;
+
+$font_family: work-sans, sans-serif;
+$heading_family: moret, serif;
 $font_size: (
   small: 10px,
   large: 12px
@@ -17,9 +24,9 @@ $line_height: (
 $container: 1220px;
 $gutter: (
   small: (
-    20px / map-get($font_size, small) * map-get($font_size, large)// Foundation runs grid units through rem-calc, but I'm using a different base size for small screens
+    23px / map-get($font_size, small) * map-get($font_size, large)// Foundation runs grid units through rem-calc, but I'm using a different base size for small screens
   ),
-  large: 40px
+  large: 30px
 );
 $outer_padding: (
   small: 20px / map-get($font_size, small) * map-get($font_size, large),

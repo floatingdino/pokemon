@@ -4,12 +4,14 @@
 body,
 html {
   font-family: s.$font_family;
+  font-weight: 700;
   background-attachment: fixed;
   padding: 0;
   margin: 0;
+  background-color: white;
+  color: s.$dark;
   @media (prefers-color-scheme: dark) {
-    background-image: none;
-    background-color: black;
+    background-color: s.$dark;
     color: white;
   }
   @each $bp, $size in s.$font_size {
@@ -21,8 +23,14 @@ html {
 }
 
 h1,
+h2,
+h3 {
+  font-family: s.$heading_family;
+  font-weight: 400;
+}
+
+h1,
 h2 {
-  font-weight: 700;
   font-style: normal;
   text-decoration: none;
   margin-top: 20px;
@@ -33,22 +41,17 @@ h2 {
   }
 }
 
-h1,
-h2 {
-  font-size: (20 / 14) * 1rem;
-  line-height: (25 / 20);
-  @include foundation.breakpoint(large) {
-    font-size: (42 / 22) * 1rem;
-    line-height: (50 / 42);
-  }
+h1 {
+  font-size: 36px;
+  line-height: 1;
 }
 
-h3 {
-  font-size: (16 / 14) * 1rem;
-  line-height: (20 / 16);
+h2 {
+  font-size: (24 / 10) * 1rem;
+  line-height: (28 / 24);
   @include foundation.breakpoint(large) {
-    font-size: (34 / 22) * 1rem;
-    line-height: (40 / 34);
+    font-size: (32 / 12) * 1rem;
+    line-height: (37 / 32);
   }
 }
 

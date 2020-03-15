@@ -1,0 +1,15 @@
+@use "settings" as s;
+
+header {
+  background-color: s.$dark;
+  color: white;
+  height: 80px;
+}
+
+.main-nav {
+  letter-spacing: 0.04em;
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}

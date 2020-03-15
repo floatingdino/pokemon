@@ -1,3 +1,5 @@
+import "./header.scss";
+
 const navItems = [
   {
     label: "Pokedex",
@@ -12,15 +14,15 @@ const navItems = [
 export default function Header() {
   return (
     <header>
-      <div className="grid-container">
-        <div className="grid-x">
-          <div className="cell grow">
+      <div className="grid-container h-100">
+        <div className="grid-x h-100 align-middle">
+          <div className="cell auto">
             <img src="../assets/img/josephmark-pokemon.png" alt="Josephmark" />
           </div>
           <div className="cell shrink">
-            <ul className="main-nav">
+            <ul className="main-nav grid-x grid-margin-x">
               {navItems.map(({ link, label }) => (
-                <li key={link}>
+                <li key={link} className="cell shrink">
                   <a>{label}</a>
                 </li>
               ))}
