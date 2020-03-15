@@ -1,0 +1,31 @@
+@use "settings" as s;
+
+.card {
+  background-color: s.$light;
+  box-shadow: s.$shadow;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 25px 20px;
+  position: relative;
+  &-holder {
+    padding-top: 85px;
+  }
+  &-img {
+    margin-top: -110px;
+    width: 150px;
+    height: 150px;
+    display: block;
+  }
+  &-img-shadow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -50px;
+    width: 100px;
+    height: 50px;
+    background-color: black;
+    opacity: 0.03;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+}

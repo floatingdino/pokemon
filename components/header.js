@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import "./header.scss";
 
 const navItems = [
@@ -31,7 +33,7 @@ export default function Header() {
                 <ul className="main-nav grid-x grid-margin-x">
                   {navItems.map(({ link, label }) => (
                     <li key={link} className="cell shrink">
-                      <a>{label}</a>
+                      <Link href={link}>{label}</Link>
                     </li>
                   ))}
                 </ul>
