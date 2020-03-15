@@ -1,14 +1,58 @@
 @use "settings" as s;
 
+$types: (
+  normal: #a8a878,
+  fire: #f08030,
+  fighting: #c03028,
+  water: #6890f0,
+  flying: #a890f0,
+  grass: #78c850,
+  poison: #a040a0,
+  electric: #f8d030,
+  ground: #e0c068,
+  psychic: #f85888,
+  rock: #b8a038,
+  ice: #98d8d8,
+  bug: #a8b820,
+  dragon: #7038f8,
+  ghost: #705898,
+  dark: #705848,
+  steel: #b8b8d0,
+  // fairy: '#EE99AC'
+);
+
 .card {
   background-color: s.$light;
   box-shadow: s.$shadow;
   border: 2px solid white;
   border-radius: 10px;
-  padding: 25px 20px;
+  padding: 23px 18px;
   position: relative;
   &-holder {
+    position: relative;
     padding-top: 85px;
+  }
+  &-active {
+    border: 4px solid rgb(s.$active, 0.4);
+    padding: 21px 16px;
+  }
+  &-tap-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+    appearance: none;
+    background-color: transparent;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 10px;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 2px 5px rgba(s.$active, 0.2);
+    }
   }
   &-img {
     margin-top: -110px;
@@ -27,5 +71,35 @@
     opacity: 0.03;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
+  }
+  &-id {
+    display: inline-block;
+    border-radius: 32px;
+    padding: 5px 15px;
+    background-color: rgba(s.$dark, 0.1);
+    color: rgba(black, 0.6);
+    &::before {
+      content: "#";
+    }
+  }
+  &-types {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+  }
+  &-type {
+    padding: 4px 12px;
+    margin: 4px;
+    border-radius: 4px;
+    line-height: (14 / 12);
+    background-color: s.$dark;
+    color: white;
+  }
+}
+
+@each $name, $colour in $types {
+  .card-type-#{$name} {
+    background-color: $colour;
   }
 }
