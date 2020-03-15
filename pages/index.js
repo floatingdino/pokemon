@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Link from "next/link";
 
 import "./index.scss";
@@ -44,6 +44,9 @@ const maxPokemon = 151;
 const maxPartySize = 6;
 
 export default class Index extends Component {
+  paginationDOM = React.createRef();
+  paginationInView = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -65,6 +68,31 @@ export default class Index extends Component {
         active: [...this.state.active, id]
       });
     }
+  }
+
+  initLoader() {
+    // TODO: fallback for browsers w/o intersection Observer
+    if (!window.IntersectionObserver) {
+      return;
+    }
+    this.observer = new IntersectionObserver(
+      entries => this.watchPaginationCallback(entries),
+      {
+        rootMargin: "0px 0px 200px 0px"
+      }
+    );
+
+    this.observer.observe(this.paginationDOM.current);
+  }
+
+  watchPaginationCallback([pagination]) {
+    this.paginationInView = pagination.isIntersecting;
+    // if in view and not already showing all pkmn, fetch next page
+    // TODO: fetch next page
+  }
+
+  componentDidMount() {
+    this.initLoader();
   }
 
   render() {
@@ -90,7 +118,9 @@ export default class Index extends Component {
                     onClick={() => this.toggleCardActive(mon.id)}
                   />
                 ))}
-                <div className="cell pagination-indicator text-center">
+                <div
+                  className="cell pagination-indicator text-center"
+                  ref={this.paginationDOM}>
                   {pokemon.length}/{maxPokemon}
                 </div>
               </div>
