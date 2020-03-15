@@ -1,33 +1,11 @@
-const navItems = [
-  {
-    label: "Pokedex",
-    link: "/"
-  },
-  {
-    label: "Party",
-    link: "/party"
-  }
-];
+import Layout from "../components/layout";
+
+import Header from "../components/header.js";
 
 export default function Index() {
   return (
-    <header>
-      <div className="grid-container">
-        <div className="grid-x">
-          <div className="cell grow">
-            <img src="../assets/img/josephmark-pokemon.png" alt="Josephmark" />
-          </div>
-          <div className="cell shrink">
-            <ul className="main-nav">
-              {navItems.map(({ link, label }) => (
-                <li key={link}>
-                  <a>{label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
+    <Layout>
+      <h1>Hello World</h1>
+    </Layout>
   );
 }

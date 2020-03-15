@@ -1,0 +1,29 @@
+@use "sass:color";
+
+$font_family: serif;
+$font_size: (
+  small: 10px,
+  large: 12px
+);
+$line_height: (
+  small: (
+    20 / 14
+  ),
+  large: (
+    40 / 24
+  )
+);
+
+$container: 1220px;
+$gutter: (
+  small: (
+    20px / map-get($font_size, small) * map-get($font_size, large)// Foundation runs grid units through rem-calc, but I'm using a different base size for small screens
+  ),
+  large: 40px
+);
+$outer_padding: (
+  small: 20px / map-get($font_size, small) * map-get($font_size, large),
+  large: 80px
+);
+
+$shadow: 0 4px 25px rgba(black, 0.15);

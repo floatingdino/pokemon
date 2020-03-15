@@ -1,0 +1,88 @@
+@use "settings" as s;
+@use "foundation";
+
+body,
+html {
+  font-family: s.$font_family;
+  background-attachment: fixed;
+  padding: 0;
+  margin: 0;
+  @media (prefers-color-scheme: dark) {
+    background-image: none;
+    background-color: black;
+    color: white;
+  }
+  @each $bp, $size in s.$font_size {
+    @include foundation.breakpoint($bp) {
+      font-size: $size;
+      line-height: map-get(s.$line_height, $bp);
+    }
+  }
+}
+
+h1,
+h2 {
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  @include foundation.breakpoint(large) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+h1,
+h2 {
+  font-size: (20 / 14) * 1rem;
+  line-height: (25 / 20);
+  @include foundation.breakpoint(large) {
+    font-size: (42 / 22) * 1rem;
+    line-height: (50 / 42);
+  }
+}
+
+h3 {
+  font-size: (16 / 14) * 1rem;
+  line-height: (20 / 16);
+  @include foundation.breakpoint(large) {
+    font-size: (34 / 22) * 1rem;
+    line-height: (40 / 34);
+  }
+}
+
+.h1,
+%h1 {
+  @extend h1;
+}
+
+.h2,
+%h2 {
+  @extend h2;
+}
+
+.h3,
+%h3 {
+  @extend h3;
+}
+
+a {
+  color: inherit;
+  &:active {
+    color: inherit;
+    transform: translateY(1px);
+  }
+  &:visited {
+    color: inherit;
+  }
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 35px;
+}
+
+.text-center {
+  text-align: center;
+}
