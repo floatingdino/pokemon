@@ -50,16 +50,16 @@ export default function Card({
                 html={name}
                 tagName="h2"
                 disabled={!inParty}
-                spellcheck="false"
+                spellCheck="false"
               />
             </div>
             <div className="cell shrink">
               <ul className="card-types mt-0 mb-0">
                 {types.map(type => (
                   <li
-                    className={`card-type card-type-${type.toLowerCase()}`}
-                    key={type}>
-                    {type}
+                    className={`card-type card-type-${type.name.toLowerCase()}`}
+                    key={type.url}>
+                    {type.name}
                   </li>
                 ))}
               </ul>

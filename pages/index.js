@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import fetch from "isomorphic-unfetch";
 
 import "./index.scss";
 
@@ -7,47 +8,39 @@ import Layout from "../components/layout";
 import Card from "../components/card";
 import PartySidebar from "../components/party-sidebar";
 
-// TODO: load from API (paged)
-const pokemon = [
-  {
-    id: "001",
-    name: "Bulbasaur",
-    types: ["Grass", "Poison"]
-  },
-  {
-    id: "002",
-    name: "Ivysaur",
-    types: ["Grass", "Poison"]
-  },
-  {
-    id: "003",
-    name: "Venusaur",
-    types: ["Grass", "Poison"]
-  },
-  {
-    id: "004",
-    name: "Charmander",
-    types: ["Fire"]
-  },
-  {
-    id: "005",
-    name: "Charmeleon",
-    types: ["Fire"]
-  },
-  {
-    id: "006",
-    name: "Charizard",
-    types: ["Fire", "Flying"]
-  }
-];
+const titleCase = term => {
+  const words = term
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.substring(1));
+  console.log(words);
+  return words.join(" ");
+};
 
 const getPokemonByID = id => {
   const [pkmn] = pokemon.filter(mon => mon.id === id);
   return pkmn;
 };
 
+const stripPokemonData = mon => {
+  return {
+    id: mon.id,
+    name: titleCase(mon.name),
+    types: mon.types.sort((a, b) => a.slot - b.slot).map(({ type }) => {
+      return {
+        name: titleCase(type.name),
+        url: type.url
+      };
+    }),
+    image: mon.sprites?.front_default
+  };
+};
+
 const maxPokemon = 151;
 const maxPartySize = 6;
+const pageSize = 12;
+
+const generationEndpoint = `https://pokeapi.co/api/v2/generation/1`;
+const pokemonEndpoint = "https://pokeapi.co/api/v2/pokemon/";
 
 export default class Index extends Component {
   paginationDOM = React.createRef();
@@ -56,7 +49,36 @@ export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: []
+      active: [],
+      page: 1,
+      pokemon: props.pokemon
+    };
+  }
+
+  static async getInitialProps() {
+    const res = await fetch(generationEndpoint);
+    const generation = await res.json();
+
+    const idRegex = /\/(\d{1,3})\//;
+
+    const allPokemon = generation.pokemon_species.map(mon => {
+      mon.id = idRegex.exec(mon.url)[1];
+      // Surely nothing can go wrong by expecting the species ID to match the Pokemon ID
+      mon.baseUrl = `${pokemonEndpoint}${mon.id}`;
+      return mon;
+    });
+
+    allPokemon.sort((a, b) => a.id - b.id);
+    const pokemon = await Promise.all(
+      allPokemon.slice(0, pageSize).map(mon =>
+        fetch(mon.baseUrl)
+          .then(r => r.json())
+          .then(mon => stripPokemonData(mon))
+      )
+    );
+    return {
+      pokemon,
+      allPokemon
     };
   }
 
@@ -102,7 +124,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { active } = this.state;
+    const { active, pokemon } = this.state;
     return (
       <Layout>
         <div className="grid-container">
@@ -125,8 +147,8 @@ export default class Index extends Component {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg">
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M9.79863 0C4.9115 0 0.949707 3.96179 0.949707 8.84891V19.5904C0.949707 24.4775 4.9115 28.4393 9.79863 28.4393C14.6858 28.4393 18.6476 24.4775 18.6476 19.5904V8.84892C18.6476 3.9618 14.6858 0 9.79863 0ZM9.79856 1.5346C5.81541 1.5346 2.58643 4.76359 2.58643 8.74674V19.6928C2.58643 23.6759 5.81541 26.9049 9.79856 26.9049C13.7817 26.9049 17.0107 23.6759 17.0107 19.6928V8.74673C17.0107 4.76358 13.7817 1.5346 9.79856 1.5346Z"
                       />
                       <rect
@@ -137,8 +159,8 @@ export default class Index extends Component {
                         rx="1.4949"
                       />
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M9.91901 22.0006L11.2025 20.7171L11.6253 21.14L9.83144 22.9338C9.71468 23.0506 9.52538 23.0506 9.40862 22.9338L7.61475 21.14L8.03757 20.7171L9.32105 22.0006L9.32105 12.5571L9.91901 12.5571L9.91901 22.0006Z"
                       />
                     </svg>
