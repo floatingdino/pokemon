@@ -3,7 +3,7 @@ import ContentEditable from "react-contenteditable";
 
 import "./card.scss";
 
-const defaultImage = "/static/img/placeholder-ball.png";
+const defaultImage = "/img/placeholder-ball.png";
 
 // TODO: Image
 

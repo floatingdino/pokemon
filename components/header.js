@@ -23,7 +23,7 @@ function Header({ router }) {
             <Link href="/">
               <a>
                 <img
-                  src="/static/img/josephmark-pokemon.png"
+                  src="/img/josephmark-pokemon.png"
                   alt="Josephmark"
                   width="114"
                   height="32"
@@ -53,7 +53,7 @@ function Header({ router }) {
               <div className="cell shrink user-profile-cell">
                 <div className="user-profile">
                   <img
-                    src="/static/img/placeholder-user.png"
+                    src="/img/placeholder-user.png"
                     alt="Profile Picture"
                     width="56"
                     height="56"

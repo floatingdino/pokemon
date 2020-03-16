@@ -1,6 +1,6 @@
 import "./preview-card.scss";
 
-const defaultImage = "/static/img/placeholder-ball.png";
+const defaultImage = "/img/placeholder-ball.png";
 
 export default function PreviewCard({ img, name }) {
   return (

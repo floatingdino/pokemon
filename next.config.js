@@ -8,5 +8,8 @@ module.exports = withSass({
     sassOptions: {
       includePaths: [path.resolve("./styles")]
     }
+  },
+  env: {
+    root: process.env.siteRoot || "http://localhost:3000/"
   }
 });

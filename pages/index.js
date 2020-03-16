@@ -8,39 +8,28 @@ import Layout from "../components/layout";
 import Card from "../components/card";
 import PartySidebar from "../components/party-sidebar";
 
-const titleCase = term => {
-  const words = term
-    .split(" ")
-    .map(word => word.charAt(0).toUpperCase() + word.substring(1));
-  console.log(words);
-  return words.join(" ");
-};
-
 const getPokemonByID = id => {
   const [pkmn] = pokemon.filter(mon => mon.id === id);
   return pkmn;
 };
 
-const stripPokemonData = mon => {
-  return {
-    id: mon.id,
-    name: titleCase(mon.name),
-    types: mon.types.sort((a, b) => a.slot - b.slot).map(({ type }) => {
-      return {
-        name: titleCase(type.name),
-        url: type.url
-      };
-    }),
-    image: mon.sprites?.front_default
-  };
-};
-
-const maxPokemon = 151;
 const maxPartySize = 6;
 const pageSize = 12;
 
-const generationEndpoint = `https://pokeapi.co/api/v2/generation/1`;
-const pokemonEndpoint = "https://pokeapi.co/api/v2/pokemon/";
+export async function getStaticProps(context) {
+  console.log(context);
+  const res = await fetch(`${process.env.root}api/pokemon`);
+  const pokemon = await res.json();
+  const maxPokemon = res.headers.get("X-Max-Pokemon");
+  const maxPages = res.headers.get("X-Max-Pages");
+  return {
+    props: {
+      pokemon,
+      maxPokemon,
+      maxPages
+    }
+  };
+}
 
 export default class Index extends Component {
   paginationDOM = React.createRef();
@@ -52,33 +41,6 @@ export default class Index extends Component {
       active: [],
       page: 1,
       pokemon: props.pokemon
-    };
-  }
-
-  static async getInitialProps() {
-    const res = await fetch(generationEndpoint);
-    const generation = await res.json();
-
-    const idRegex = /\/(\d{1,3})\//;
-
-    const allPokemon = generation.pokemon_species.map(mon => {
-      mon.id = idRegex.exec(mon.url)[1];
-      // Surely nothing can go wrong by expecting the species ID to match the Pokemon ID
-      mon.baseUrl = `${pokemonEndpoint}${mon.id}`;
-      return mon;
-    });
-
-    allPokemon.sort((a, b) => a.id - b.id);
-    const pokemon = await Promise.all(
-      allPokemon.slice(0, pageSize).map(mon =>
-        fetch(mon.baseUrl)
-          .then(r => r.json())
-          .then(mon => stripPokemonData(mon))
-      )
-    );
-    return {
-      pokemon,
-      allPokemon
     };
   }
 
@@ -124,7 +86,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { active, pokemon } = this.state;
+    const { active, pokemon, maxPokemon } = this.state;
     return (
       <Layout>
         <div className="grid-container">
