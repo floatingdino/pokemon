@@ -16,12 +16,14 @@ const getPokemonByID = id => {
 const maxPartySize = 6;
 const pageSize = 12;
 
+const pokemonEndpoint = `${process.env.root}api/pokemon`;
+
 export async function getStaticProps(context) {
   console.log(context);
-  const res = await fetch(`${process.env.root}api/pokemon`);
+  const res = await fetch(pokemonEndpoint);
   const pokemon = await res.json();
-  const maxPokemon = res.headers.get("X-Max-Pokemon");
-  const maxPages = res.headers.get("X-Max-Pages");
+  const maxPokemon = parseInt(res.headers.get("X-Max-Pokemon"), 10);
+  const maxPages = parseInt(res.headers.get("X-Max-Pages"), 10);
   return {
     props: {
       pokemon,
@@ -40,7 +42,8 @@ export default class Index extends Component {
     this.state = {
       active: [],
       page: 1,
-      pokemon: props.pokemon
+      pokemon: props.pokemon,
+      fetching: false
     };
   }
 
@@ -77,8 +80,35 @@ export default class Index extends Component {
 
   watchPaginationCallback([pagination]) {
     this.paginationInView = pagination.isIntersecting;
+
+    if (this.paginationInView) {
+      this.fetchNextPage();
+    }
     // if in view and not already showing all pkmn, fetch next page
     // TODO: fetch next page
+  }
+
+  async fetchNextPage() {
+    if (!this.state.fetching && this.state.page <= this.props.maxPages) {
+      this.setState({
+        fetching: true
+      });
+      const res = await fetch(`${pokemonEndpoint}?page=${this.state.page + 1}`);
+      const pokemon = await res.json();
+      this.setState(
+        {
+          pokemon: [...this.state.pokemon, ...pokemon],
+          page: this.state.page + 1,
+          fetching: false
+        },
+        () => {
+          // Keep filling until the pagination goes offscreen
+          if (this.paginationInView) {
+            this.fetchNextPage();
+          }
+        }
+      );
+    }
   }
 
   componentDidMount() {
@@ -86,7 +116,8 @@ export default class Index extends Component {
   }
 
   render() {
-    const { active, pokemon, maxPokemon } = this.state;
+    const { active, pokemon } = this.state;
+    const { maxPokemon } = this.props;
     return (
       <Layout>
         <div className="grid-container">
