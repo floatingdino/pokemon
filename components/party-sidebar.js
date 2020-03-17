@@ -5,13 +5,6 @@ import "./party-sidebar.scss";
 import PreviewCard from "./preview-card";
 
 export default function PartySidebar({ pokemon, max }) {
-  if (pokemon.length < 6) {
-    for (let i = pokemon.length; i < max; i++) {
-      pokemon.push({
-        id: `empty-${i}`
-      });
-    }
-  }
   return (
     <div className="party-sidebar">
       <div className="grid-y grid-margin-y">

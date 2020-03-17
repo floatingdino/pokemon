@@ -8,18 +8,11 @@ import Layout from "../components/layout";
 import Card from "../components/card";
 import PartySidebar from "../components/party-sidebar";
 
-const getPokemonByID = id => {
-  const [pkmn] = pokemon.filter(mon => mon.id === id);
-  return pkmn;
-};
-
-const maxPartySize = 6;
-const pageSize = 12;
+import Party from "../services/party";
 
 const pokemonEndpoint = `${process.env.root}api/pokemon`;
 
 export async function getStaticProps(context) {
-  console.log(context);
   const res = await fetch(pokemonEndpoint);
   const pokemon = await res.json();
   const maxPokemon = parseInt(res.headers.get("X-Max-Pokemon"), 10);
@@ -39,28 +32,37 @@ export default class Index extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       active: [],
+      party: [],
       page: 1,
       pokemon: props.pokemon,
       fetching: false
     };
+
+    // Only instantiate party on the client side (since it uses localStorage)
+    if (typeof window !== "undefined") {
+      this.party = new Party();
+      this.state.active = this.party.party.map(mon => mon.id);
+      this.state.party = this.party.party;
+      console.log(this.party);
+    }
   }
 
-  // TODO: sync to localStorage or API
   toggleCardActive(id) {
     const idIndex = this.state.active.indexOf(id);
     if (idIndex >= 0) {
-      const newActive = this.state.active;
-      newActive.pop(idIndex);
-      this.setState({
-        active: newActive
-      });
-    } else if (this.state.active.length < maxPartySize) {
-      this.setState({
-        active: [...this.state.active, id]
-      });
+      this.party.remove(id);
+    } else {
+      const [mon] = this.state.pokemon.filter(mon => mon.id === id);
+      this.party.add(mon);
     }
+
+    this.setState({
+      active: this.party.party.map(mon => mon.id),
+      party: this.party.party
+    });
   }
 
   initLoader() {
@@ -71,7 +73,7 @@ export default class Index extends Component {
     this.observer = new IntersectionObserver(
       entries => this.watchPaginationCallback(entries),
       {
-        rootMargin: "0px 0px 200px 0px"
+        rootMargin: "0px 0px 400px 0px"
       }
     );
 
@@ -84,8 +86,6 @@ export default class Index extends Component {
     if (this.paginationInView) {
       this.fetchNextPage();
     }
-    // if in view and not already showing all pkmn, fetch next page
-    // TODO: fetch next page
   }
 
   async fetchNextPage() {
@@ -116,7 +116,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { active, pokemon } = this.state;
+    const { active, pokemon, party } = this.state;
     const { maxPokemon } = this.props;
     return (
       <Layout>
@@ -180,10 +180,7 @@ export default class Index extends Component {
             </div>
             <div className="cell large-1" />
             <div className="cell large-1">
-              <PartySidebar
-                pokemon={active.map(id => getPokemonByID(id))}
-                max={maxPartySize}
-              />
+              <PartySidebar pokemon={party} max={this.party?.maxMembers || 6} />
             </div>
           </div>
         </div>

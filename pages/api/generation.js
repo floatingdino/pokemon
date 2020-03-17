@@ -20,8 +20,8 @@ export default async (req, res) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
 
-  // 1 Day cache lifetime
-  res.setHeader("Cache-Control", "public, max-age=86400");
+  // 30 Day cache lifetime
+  res.setHeader("Cache-Control", "public, max-age=2592000, s-max-age=2592000");
 
   res.end(JSON.stringify(allPokemon));
 };

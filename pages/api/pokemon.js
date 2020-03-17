@@ -1,3 +1,5 @@
+import CORS from "micro-cors";
+
 const pageSize = 12;
 const generationEndpoint = `${process.env.root}api/generation`;
 
@@ -11,7 +13,9 @@ const titleCase = term => {
 const stripPokemonData = mon => {
   return {
     id: mon.id,
-    name: titleCase(mon.name),
+    name: titleCase(mon.name)
+      .replace("-m", "♂")
+      .replace("-f", "♀"),
     types: mon.types.sort((a, b) => a.slot - b.slot).map(({ type }) => {
       return {
         name: titleCase(type.name),
@@ -22,13 +26,11 @@ const stripPokemonData = mon => {
   };
 };
 
-export default async (req, res) => {
+const handler = async (req, res) => {
   // TODO: error handling
   const params = req.query;
 
-  const allPokemon = await fetch(generationEndpoint, {
-    cache: "force-cache"
-  }).then(r => r.json());
+  const allPokemon = await fetch(generationEndpoint).then(r => r.json());
 
   const startIndex =
     (params.page && (params.page - 1) * (params.page_size || pageSize)) || 0;
@@ -51,8 +53,10 @@ export default async (req, res) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
 
-  // 1 Day cache lifetime
-  res.setHeader("Cache-Control", "public, max-age=86400");
+  // 30 Day cache lifetime
+  res.setHeader("Cache-Control", "public, max-age=2592000, s-max-age=2592000");
 
   res.end(JSON.stringify(pokemon));
 };
+
+export default handler;

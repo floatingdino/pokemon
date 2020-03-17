@@ -2,13 +2,13 @@ import "./preview-card.scss";
 
 const defaultImage = "/img/placeholder-ball.png";
 
-export default function PreviewCard({ img, name }) {
+export default function PreviewCard({ image, name }) {
   return (
     <div
-      className={`preview-card mb-3 text-center ${(!img &&
+      className={`preview-card mb-3 text-center ${(!image &&
         "preview-card-empty") ||
         null}`}>
-      <img src={img || defaultImage} alt={name || "No Pokemon selected"} />
+      <img src={image || defaultImage} alt={name || "No Pokemon selected"} />
     </div>
   );
 }
