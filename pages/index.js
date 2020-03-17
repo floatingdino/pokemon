@@ -40,14 +40,6 @@ export default class Index extends Component {
       pokemon: props.pokemon,
       fetching: false
     };
-
-    // Only instantiate party on the client side (since it uses localStorage)
-    if (typeof window !== "undefined") {
-      this.party = new Party();
-      this.state.active = this.party.party.map(mon => mon.id);
-      this.state.party = this.party.party;
-      console.log(this.party);
-    }
   }
 
   toggleCardActive(id) {
@@ -113,6 +105,13 @@ export default class Index extends Component {
 
   componentDidMount() {
     this.initLoader();
+    // Only instantiate party on the client side (since it uses localStorage)
+    if (typeof window !== "undefined") {
+      this.party = new Party();
+      this.state.active = this.party.party.map(mon => mon.id);
+      this.state.party = this.party.party;
+      console.log(this.party);
+    }
   }
 
   render() {

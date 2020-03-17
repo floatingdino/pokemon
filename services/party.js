@@ -19,10 +19,12 @@ export default class Party {
       return;
     }
     this.party = JSON.parse(localStorage.getItem(this.storageKey));
-    this.realLength = this.party.reduce(
-      (acc, mon) => (mon.name && acc++) || acc,
-      0
-    );
+    this.party.forEach(mon => {
+      if (mon.name !== undefined) {
+        this.realLength++;
+      }
+    });
+    console.log(this.party, this.realLength);
   }
 
   add(mon) {
@@ -32,12 +34,11 @@ export default class Party {
     this.party.splice(this.realLength, 1, mon);
     this.realLength++;
     this.updateStorage();
-    console.log(this);
   }
 
   remove(id) {
     const newParty = this.party.filter(mon => mon.id !== id);
-    this.party = [...newParty, { id: `empty-${this.realLength}` }];
+    this.party = [...newParty, { id: `empty-${Date.now()}` }];
     this.realLength--;
     this.updateStorage();
   }

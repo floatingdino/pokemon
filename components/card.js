@@ -14,20 +14,22 @@ export default function Card({
   active,
   inParty,
   onClick,
-  image
+  image,
+  onChange
 }) {
   return (
     <article className={`cell large-4 text-center card-holder`}>
-      {onClick && (
-        <button type="button" onClick={onClick} className="card-tap-area">
-          <span className="show-for-sr">
-            {(active && "Remove from Party") || "Add to Party"}
-          </span>
-        </button>
-      )}
+      {onClick &&
+        !inParty && (
+          <button type="button" onClick={onClick} className="card-tap-area">
+            <span className="show-for-sr">
+              {(active && "Remove from Party") || "Add to Party"}
+            </span>
+          </button>
+        )}
       <div
         className={`card pkmn-card h-100 grid-y ${(active && "card-active") ||
-          null} ${(!name && "card-empty") || "card-not-empty"}`}>
+          null} ${(name === undefined && "card-empty") || "card-not-empty"}`}>
         <div className="cell shrink">
           <img
             className="card-img"
@@ -37,7 +39,7 @@ export default function Card({
             height="150"
           />
         </div>
-        {name && (
+        {name !== undefined && (
           <>
             <div className="card-img-shadow" />
             <div className="cell shrink">
@@ -45,9 +47,11 @@ export default function Card({
                 {id}
               </div>
             </div>
-            <div className="cell grow">
+            <div className="cell">
               <ContentEditable
                 html={name}
+                value={name}
+                onChange={onChange}
                 tagName="h2"
                 disabled={!inParty}
                 spellCheck="false"
@@ -64,9 +68,32 @@ export default function Card({
                 ))}
               </ul>
             </div>
+            {onClick &&
+              inParty && (
+                <button
+                  type="button"
+                  onClick={onClick}
+                  className="party-remove-button">
+                  <span className="show-for-sr">Remove From Party</span>
+                  <svg
+                    width="8"
+                    height="8"
+                    viewBox="0 0 8 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M1 1L7 7M7 1L1 7"
+                      stroke="#333333"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              )}
           </>
         )}
-        {!name && (
+        {name === undefined && (
           <div className="cell">
             <Link href="/">
               <a
@@ -82,9 +109,9 @@ export default function Card({
                     <path
                       d="M10 1.89282V17.1071M17.6071 9.49996H2.39286"
                       stroke="#333333"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </span>
