@@ -47,7 +47,7 @@ export default function Card({
                 {id}
               </div>
             </div>
-            <div className="cell">
+            <div className="cell card-title-cell">
               <ContentEditable
                 html={name}
                 value={name}

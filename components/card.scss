@@ -130,6 +130,12 @@ $types: (
       display: block;
     }
   }
+  &-title-cell {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 @each $name, $colour in $types {
   .card-type-#{$name} {
