@@ -1,7 +1,7 @@
 const generationEndpoint = "https://pokeapi.co/api/v2/generation/1";
 const pokemonEndpoint = "https://pokeapi.co/api/v2/pokemon/";
 
-export default async (req, res) => {
+export async function getGeneration() {
   const rr = await fetch(generationEndpoint, { cache: "force-cache" });
   const generation = await rr.json();
 
@@ -15,6 +15,12 @@ export default async (req, res) => {
   });
 
   allPokemon.sort((a, b) => a.id - b.id);
+
+  return allPokemon;
+}
+
+export default async (req, res) => {
+  const allPokemon = await getGeneration();
 
   // TODO: error handling
   res.statusCode = 200;

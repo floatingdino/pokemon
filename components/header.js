@@ -46,7 +46,9 @@ function Header({ router }) {
                 <span className="show-for-sr">Open Mobile Menu</span>
               </button>
             </div>
-            <div class={`main-nav ${(!open && "hidden") || ""}`} id="main-nav">
+            <div
+              className={`main-nav ${(!open && "hidden") || ""}`}
+              id="main-nav">
               <nav className={`grid-x grid-margin-x align-middle`}>
                 <div className="cell large-auto">
                   <ul className="main-nav-list grid-x grid-margin-x">
@@ -75,7 +77,7 @@ function Header({ router }) {
                   </div>
                 </div>
               </nav>
-              <div class="mobile-menu-logo hide-for-medium">
+              <div className="mobile-menu-logo hide-for-medium">
                 <Link href="/">
                   <a>
                     <img

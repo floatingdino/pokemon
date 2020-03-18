@@ -1,6 +1,6 @@
-import CORS from "micro-cors";
-
-const pageSize = 12;
+import { getGeneration } from "./generation";
+const http = require("http");
+const defaultPageSize = 12;
 const generationEndpoint = `${process.env.root}api/generation`;
 
 const titleCase = term => {
@@ -10,12 +10,15 @@ const titleCase = term => {
   return words.join(" ");
 };
 
+// We don't need all the pokemon data, so just send the attributes we want
 const stripPokemonData = mon => {
   return {
     id: mon.id,
+    // There doesn't seem to be a way to grab the correct name, so I'm just manually updating the ones that come out wrong
     name: titleCase(mon.name)
-      .replace("-m", "♂")
-      .replace("-f", "♀"),
+      .replace("Nidoran-m", "Nidoran♂")
+      .replace("Nidoran-f", "Nidoran♀")
+      .replace("Mr-mime", "Mr. Mime"),
     types: mon.types.sort((a, b) => a.slot - b.slot).map(({ type }) => {
       return {
         name: titleCase(type.name),
@@ -26,28 +29,37 @@ const stripPokemonData = mon => {
   };
 };
 
-const handler = async (req, res) => {
-  // TODO: error handling
-  const params = req.query;
+export { defaultPageSize };
+export async function getPokemon(page = 0, pageSize = defaultPageSize) {
+  const allPokemon = await getGeneration();
 
-  const allPokemon = await fetch(generationEndpoint).then(r => r.json());
-
-  const startIndex =
-    (params.page && (params.page - 1) * (params.page_size || pageSize)) || 0;
-  const endIndex = startIndex + (params.page_size || pageSize);
+  const startIndex = page * pageSize || 0;
+  const endIndex = startIndex + pageSize;
 
   const pokemon = await Promise.all(
     allPokemon.slice(startIndex, endIndex).map(mon =>
-      fetch(mon.baseUrl, { cache: "force-cache" })
+      fetch(mon.baseUrl)
         .then(r => r.json())
         .then(mon => stripPokemonData(mon))
     )
   );
 
+  return { pokemon, allPokemon };
+}
+
+export default async (req, res) => {
+  // TODO: error handling
+  const params = req.query;
+
+  const { pokemon, allPokemon } = await getPokemon(
+    params.page,
+    params.page_size
+  );
+
   res.setHeader("X-Max-Pokemon", allPokemon.length);
   res.setHeader(
     "X-Max-Pages",
-    Math.ceil(allPokemon.length / (params.page_size || pageSize))
+    Math.ceil(allPokemon.length / (params.page_size || defaultPageSize))
   );
 
   res.statusCode = 200;
@@ -58,5 +70,3 @@ const handler = async (req, res) => {
 
   res.end(JSON.stringify(pokemon));
 };
-
-export default handler;

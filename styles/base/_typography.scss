@@ -10,6 +10,14 @@ html {
   margin: 0;
   background-color: s.$body;
   color: s.$dark;
+  background-image: url("/img/pikachu.png");
+  background-repeat: no-repeat;
+  background-size: auto 90%;
+  background-position: -195px bottom;
+  background-attachment: fixed;
+  @include foundation.breakpoint(medium) {
+    background-position: 40px bottom;
+  }
   @media (prefers-color-scheme: dark) {
     background-color: s.$dark;
     color: white;

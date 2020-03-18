@@ -5,8 +5,6 @@ import "./card.scss";
 
 const defaultImage = "/img/placeholder-ball.png";
 
-// TODO: Image
-
 export default function Card({
   id,
   name,
@@ -38,6 +36,15 @@ export default function Card({
             width="150"
             height="150"
           />
+          {!inParty &&
+            active && (
+              <img
+                className="pokemon-capture"
+                src="/img/pokeball-capture.gif"
+                aria-hidden="true"
+                alt
+              />
+            )}
         </div>
         {name !== undefined && (
           <>

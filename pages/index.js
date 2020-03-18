@@ -9,14 +9,14 @@ import Card from "../components/card";
 import PartySidebar from "../components/party-sidebar";
 
 import Party from "../services/party";
+import { getPokemon, defaultPageSize } from "./api/pokemon";
 
 const pokemonEndpoint = `${process.env.root}api/pokemon`;
 
 export async function getStaticProps(context) {
-  const res = await fetch(pokemonEndpoint);
-  const pokemon = await res.json();
-  const maxPokemon = parseInt(res.headers.get("X-Max-Pokemon"), 10);
-  const maxPages = parseInt(res.headers.get("X-Max-Pages"), 10);
+  const { pokemon, allPokemon } = await getPokemon();
+  const maxPokemon = allPokemon.length;
+  const maxPages = Math.ceil(allPokemon.length / defaultPageSize);
   return {
     props: {
       pokemon,

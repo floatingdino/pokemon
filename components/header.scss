@@ -49,12 +49,20 @@ header {
     padding: 60px foundation.rem-calc(map-get(s.$outer_padding, small) / 2);
     animation: fade-in 0.3s;
     background-color: s.$dark;
+    background-image: url("/img/pikachu.png");
+    background-repeat: no-repeat;
+    background-size: auto 90%;
+    background-position: -195px bottom;
+    background-attachment: fixed;
     z-index: 4;
     text-align: center;
     font-size: 24px;
     align-items: flex-start;
     display: flex;
-    flex-f &.hidden {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    &.hidden {
       visibility: hidden;
       opacity: 0;
       pointer-events: none;
@@ -84,17 +92,18 @@ header {
   background: none;
   border: none;
   padding: 10px;
-  height: 45px;
-  width: 45px;
+  height: 51px;
+  width: 51px;
   position: relative;
   margin: -10px -10px -10px 0;
-  color: inherit;
+  color: s.$body;
   z-index: 5;
   &::before,
   &::after {
     content: "";
-    width: 25px;
-    height: 2px;
+    width: 31px;
+    height: 3px;
+    border-radius: 5px;
     background-color: currentColor;
     display: block;
     position: absolute;

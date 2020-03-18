@@ -58,7 +58,7 @@ export default class PartyView extends Component {
               </h1>
             </div>
             <div className="cell large-6">
-              <div className="grid-x grid-margin-x">
+              <div className="grid-x grid-margin-x grid-margin-y">
                 {party.map((mon, index) => (
                   <Card
                     key={mon.id}
