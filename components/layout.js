@@ -10,10 +10,11 @@ export default function Layout({ children }) {
       <Head>
         <title>Pokemon Team Builder</title>
         <meta name="robots" content="noindex" />
-        <link rel="stylesheet" href="https://use.typekit.net/ske3nsg.css" />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Header />
       {children}
+      <link rel="stylesheet" href="https://use.typekit.net/ske3nsg.css" />
     </>
   );
 }

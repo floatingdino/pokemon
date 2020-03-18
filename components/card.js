@@ -19,11 +19,14 @@ export default function Card({
     <article className={`cell large-4 small-6 text-center card-holder`}>
       {onClick &&
         !inParty && (
-          <button type="button" onClick={onClick} className="card-tap-area">
-            <span className="show-for-sr">
-              {(active && "Remove from Party") || "Add to Party"}
-            </span>
-          </button>
+          <button
+            type="button"
+            onClick={onClick}
+            className="card-tap-area"
+            title={
+              (active && `Remove ${name} from Party`) || `Add ${name} to Party`
+            }
+          />
         )}
       <div
         className={`card pkmn-card h-100 grid-y ${(active && "card-active") ||

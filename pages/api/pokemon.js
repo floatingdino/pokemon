@@ -52,6 +52,8 @@ export default async (req, res) => {
   // TODO: error handling
   const params = req.query;
 
+  // I'm leveraging the Now function CDN cache to make this really fast
+  // even though I'm doing a bunch of concurrent fetches
   const { pokemon, allPokemon } = await getPokemon(
     params.page,
     params.page_size
