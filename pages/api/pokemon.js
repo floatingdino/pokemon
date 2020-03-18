@@ -31,10 +31,10 @@ const stripPokemonData = mon => {
 };
 
 export { defaultPageSize };
-export async function getPokemon(page = 0, pageSize = defaultPageSize) {
+export async function getPokemon(page = 1, pageSize = defaultPageSize) {
   const allPokemon = await getGeneration();
 
-  const startIndex = page * pageSize || 0;
+  const startIndex = (page - 1) * pageSize || 0;
   const endIndex = startIndex + pageSize;
 
   const pokemon = await Promise.all(
@@ -67,7 +67,10 @@ export default async (req, res) => {
   res.setHeader("Content-Type", "application/json");
 
   // 30 Day cache lifetime
-  res.setHeader("Cache-Control", "public, max-age=2592000, s-max-age=2592000");
+  res.setHeader(
+    "Cache-Control",
+    "public, max-age=2592000, s-max-age=2592000, stale-while-revalidate"
+  );
 
   res.end(JSON.stringify(pokemon));
 };
