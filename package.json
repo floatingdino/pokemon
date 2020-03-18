@@ -1,7 +1,11 @@
 {
   "name": "pokemon",
   "version": "0.0.1",
-  "description": "",
+  "description": "A Pokemon Party build web app, using Nextjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/floatingdino/pokemon"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -21,8 +25,5 @@
     "react-dom": "^16.13.0",
     "sass": "^1.26.3"
   },
-  "browserslist": [
-    "defaults",
-    "not IE 11"
-  ]
+  "browserslist": ["defaults", "not IE 11"]
 }

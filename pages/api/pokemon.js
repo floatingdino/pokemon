@@ -2,7 +2,6 @@ import fetch from "isomorphic-unfetch";
 import { getGeneration } from "./generation";
 
 const defaultPageSize = 12;
-const generationEndpoint = `${process.env.root}api/generation`;
 
 const titleCase = term => {
   const words = term

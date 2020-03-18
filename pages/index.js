@@ -10,7 +10,7 @@ import PartySidebar from "../components/party-sidebar";
 import Party from "../services/party";
 import { getPokemon, defaultPageSize } from "./api/pokemon";
 
-const pokemonEndpoint = `${process.env.root}api/pokemon`;
+const pokemonEndpoint = `/api/pokemon`;
 
 export async function getStaticProps(context) {
   const { pokemon, allPokemon } = await getPokemon();
