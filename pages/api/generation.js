@@ -1,3 +1,5 @@
+import fetch from "isomorphic-unfetch";
+
 const generationEndpoint = "https://pokeapi.co/api/v2/generation/1";
 const pokemonEndpoint = "https://pokeapi.co/api/v2/pokemon/";
 

@@ -1,5 +1,6 @@
+import fetch from "isomorphic-unfetch";
 import { getGeneration } from "./generation";
-const http = require("http");
+
 const defaultPageSize = 12;
 const generationEndpoint = `${process.env.root}api/generation`;
 

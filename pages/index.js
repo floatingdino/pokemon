@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Link from "next/link";
-import fetch from "isomorphic-unfetch";
 
 import "./index.scss";
 
@@ -184,6 +183,12 @@ export default class Index extends Component {
             </div>
           </div>
         </div>
+        <img
+          className="capture-asset-preloader"
+          src="/img/pokeball-capture.gif"
+          alt
+          style={{ display: "none" }}
+        />
       </Layout>
     );
   }
