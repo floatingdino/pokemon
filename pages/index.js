@@ -186,7 +186,7 @@ export default class Index extends Component {
         <img
           className="capture-asset-preloader"
           src="/img/pokeball-capture.gif"
-          alt
+          alt=""
           style={{ display: "none" }}
         />
       </Layout>

@@ -45,7 +45,7 @@ export default function Card({
                 className="pokemon-capture"
                 src="/img/pokeball-capture.gif"
                 aria-hidden="true"
-                alt
+                alt=""
               />
             )}
         </div>

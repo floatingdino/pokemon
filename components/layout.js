@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Html } from "next/document";
 
 import "../styles/styles.scss";
 
@@ -9,12 +10,9 @@ export default function Layout({ children }) {
     <>
       <Head>
         <title>Pokemon Team Builder</title>
-        <meta name="robots" content="noindex" />
-        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Header />
       {children}
-      <link rel="stylesheet" href="https://use.typekit.net/ske3nsg.css" />
     </>
   );
 }
