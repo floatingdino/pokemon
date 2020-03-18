@@ -18,7 +18,7 @@ export default function Card({
   onChange
 }) {
   return (
-    <article className={`cell large-4 text-center card-holder`}>
+    <article className={`cell large-4 small-6 text-center card-holder`}>
       {onClick &&
         !inParty && (
           <button type="button" onClick={onClick} className="card-tap-area">

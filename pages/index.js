@@ -42,6 +42,18 @@ export default class Index extends Component {
     };
   }
 
+  componentDidMount() {
+    this.initLoader();
+    // Only instantiate party on the client side (since it uses localStorage)
+    if (typeof window !== "undefined") {
+      this.party = new Party();
+      this.setState({
+        active: this.party.party.map(mon => mon.id),
+        party: this.party.party
+      });
+    }
+  }
+
   toggleCardActive(id) {
     const idIndex = this.state.active.indexOf(id);
     if (idIndex >= 0) {
@@ -103,17 +115,6 @@ export default class Index extends Component {
     }
   }
 
-  componentDidMount() {
-    this.initLoader();
-    // Only instantiate party on the client side (since it uses localStorage)
-    if (typeof window !== "undefined") {
-      this.party = new Party();
-      this.state.active = this.party.party.map(mon => mon.id);
-      this.state.party = this.party.party;
-      console.log(this.party);
-    }
-  }
-
   render() {
     const { active, pokemon, party } = this.state;
     const { maxPokemon } = this.props;
@@ -122,15 +123,15 @@ export default class Index extends Component {
         <div className="grid-container">
           <div className="grid-x grid-margin-x">
             <div className="cell large-1" />
-            <div className="cell large-2">
+            <div className="cell large-2 archive-title-holder">
               <div className="archive-left-column grid-y">
-                <div className="cell auto grid-x align-middle">
+                <div className="cell large-auto grid-x align-middle">
                   <h1>
                     Choose<br />your team
                   </h1>
                 </div>
                 <div className="cell shrink">
-                  <div className="scroll-more text-center show-for-large-">
+                  <div className="scroll-more text-center show-for-large">
                     Scroll for more
                     <svg
                       width="19"
@@ -178,7 +179,7 @@ export default class Index extends Component {
               </div>
             </div>
             <div className="cell large-1" />
-            <div className="cell large-1">
+            <div className="cell large-1 party-sidebar-holder">
               <PartySidebar pokemon={party} max={this.party?.maxMembers || 6} />
             </div>
           </div>

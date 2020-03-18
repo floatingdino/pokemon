@@ -1,4 +1,5 @@
 @use "settings" as s;
+@use "foundation";
 
 .btn {
   transition: background-color 0.3s;
@@ -9,12 +10,12 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 75px;
-    height: 75px;
+    width: 55px;
+    height: 55px;
     border-radius: 40px;
-    background-color: rgba(s.$active, 0.6);
+    background-color: lighten(#69a99f, 4);
     color: white;
-    font-size: 18px;
+    font-size: 12px;
     line-height: 1;
     font-family: s.$heading_family;
     font-weight: 700;
@@ -24,6 +25,11 @@
     appearance: none;
     cursor: pointer;
     padding: 10px;
+    @include foundation.breakpoint(medium) {
+      width: 75px;
+      height: 75px;
+      font-size: 18px;
+    }
   }
   &:hover {
     background-color: s.$active;
@@ -42,5 +48,13 @@
   &-centered {
     margin-left: auto;
     margin-right: auto;
+  }
+  &-floating {
+    @include foundation.breakpoint(small down) {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      z-index: 3;
+    }
   }
 }

@@ -1,10 +1,14 @@
 @use "settings" as s;
+@use "foundation";
 
 header {
   background-color: s.$dark;
   color: rgba(white, 0.6);
   height: 80px;
-  margin-bottom: 110px;
+  margin-bottom: 40px;
+  @include foundation.breakpoint(large) {
+    margin-bottom: 110px;
+  }
   img {
     display: block;
   }
@@ -14,7 +18,111 @@ header {
   margin-top: 12px;
 }
 
-.main-nav {
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@include foundation.breakpoint(small down) {
+  .main-nav {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 60px foundation.rem-calc(map-get(s.$outer_padding, small) / 2);
+    animation: fade-in 0.3s;
+    background-color: s.$dark;
+    z-index: 4;
+    text-align: center;
+    font-size: 24px;
+    align-items: flex-start;
+    display: flex;
+    flex-f &.hidden {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, visibility 0.3s, left 0.1s 0.3s, right 0.1s 0.3s;
+      animation: none;
+      right: 100%;
+      left: -100%;
+    }
+  }
+  .main-nav-list {
+    animation: rise 0.4s 0.15s ease-out backwards;
+    .hidden & {
+      animation: none;
+    }
+    li {
+      width: 100%;
+      margin-bottom: 36px;
+    }
+  }
+  .user-profile-cell {
+    order: -1;
+  }
+}
+
+.mobile-menu-opener {
+  padding: 0;
+  background: none;
+  border: none;
+  padding: 10px;
+  height: 45px;
+  width: 45px;
+  position: relative;
+  margin: -10px -10px -10px 0;
+  color: inherit;
+  z-index: 5;
+  &::before,
+  &::after {
+    content: "";
+    width: 25px;
+    height: 2px;
+    background-color: currentColor;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition-propery: transform, top;
+    transition-duration: 0.35s;
+    transition-timing-function: cubic-bezier(0.65, 2.35, 0.03, 0.71);
+  }
+  &::before {
+    top: calc(50% - 5px);
+  }
+  &::after {
+    top: calc(50% + 5px);
+  }
+  &[aria-expanded="true"] {
+    &::before {
+      top: 50%;
+      transform: translateX(-50%) rotate(45deg);
+    }
+    &::after {
+      top: 50%;
+      transform: translateX(-50%) rotate(-45deg);
+    }
+  }
+}
+
+.main-nav-list {
   letter-spacing: 0.04em;
   list-style: none;
   margin-top: 0;
@@ -31,8 +139,26 @@ header {
 
 .user-profile {
   background-color: white;
-  height: 56px;
-  width: 56px;
-  border-radius: 28px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
   overflow: hidden;
+  margin: 0 auto 180px;
+  @include foundation.breakpoint(medium) {
+    height: 56px;
+    width: 56px;
+    margin: 0 auto;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mobile-menu-logo {
+  width: 100%;
+  img {
+    margin: 0 auto;
+    display: block;
+  }
 }

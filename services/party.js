@@ -24,7 +24,6 @@ export default class Party {
         this.realLength++;
       }
     });
-    console.log(this.party, this.realLength);
   }
 
   add(mon) {

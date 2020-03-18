@@ -1,4 +1,10 @@
+@use "foundation";
+
 .party-sidebar {
-  position: sticky;
-  top: 20px;
+  margin: 10px 0;
+  @include foundation.breakpoint(large) {
+    margin: 0;
+    position: sticky;
+    top: 20px;
+  }
 }

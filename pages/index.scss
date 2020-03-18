@@ -1,4 +1,5 @@
 @use "settings" as s;
+@use "foundation";
 
 .pagination-indicator {
   font-size: 24px;
@@ -16,5 +17,16 @@
   }
 }
 .archive-left-column {
-  min-height: calc(100vh - 300px);
+  @include foundation.breakpoint(large) {
+    min-height: calc(100vh - 300px);
+  }
+}
+
+@include foundation.breakpoint(small down) {
+  .archive-title-holder {
+    order: -2;
+  }
+  .party-sidebar-holder {
+    order: -1;
+  }
 }
