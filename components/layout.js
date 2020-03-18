@@ -10,6 +10,10 @@ export default function Layout({ children }) {
     <>
       <Head>
         <title>Pokemon Team Builder</title>
+        <meta
+          name="description"
+          content="Browse and select your party of Generation 1 Pokemon"
+        />
       </Head>
       <Header />
       {children}
