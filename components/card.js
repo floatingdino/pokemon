@@ -32,16 +32,26 @@ export default function Card({
         className={`card pkmn-card h-100 grid-y ${(active && "card-active") ||
           null} ${(name === undefined && "card-empty") || "card-not-empty"}`}>
         <div className="cell shrink">
-          <picture>
-            <source srcSet={`${image}.webp`} type="image/webp" />
+          {(image && (
+            <picture>
+              <source srcSet={`${image}.webp`} type="image/webp" />
+              <img
+                className="card-img"
+                src={`${image}.png` || defaultImage}
+                alt={name}
+                width="150"
+                height="150"
+              />
+            </picture>
+          )) || (
             <img
-              className="card-img"
-              src={`${image}.png` || defaultImage}
-              alt={name}
+              src={defaultImage}
+              alt="No Pokemon Selected"
               width="150"
               height="150"
+              className="card-img"
             />
-          </picture>
+          )}
           {!inParty &&
             active && (
               <img

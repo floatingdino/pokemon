@@ -182,6 +182,11 @@ $types: (
       margin: 4px;
     }
   }
+  &-empty {
+    .card-img {
+      image-rendering: auto;
+    }
+  }
   &-empty-button {
     background-color: s.$body;
     box-shadow: s.$shadow;

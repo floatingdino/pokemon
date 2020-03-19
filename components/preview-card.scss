@@ -13,6 +13,11 @@
   &-empty {
     opacity: 0.4;
     animation: none;
+    &-empty {
+      img {
+        image-rendering: auto;
+      }
+    }
   }
   img {
     height: auto;
