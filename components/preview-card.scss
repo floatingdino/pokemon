@@ -16,5 +16,9 @@
   }
   img {
     height: auto;
+    image-rendering: pixelated;
+    @supports (image-rendering: crisp-edges) {
+      image-rendering: crisp-edges;
+    }
   }
 }

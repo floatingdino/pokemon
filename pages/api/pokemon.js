@@ -25,7 +25,8 @@ const stripPokemonData = mon => {
         url: type.url
       };
     }),
-    image: mon.sprites?.front_default
+    image: `/api/sharp/${mon.id}`,
+    sprite: mon.sprites?.front_default
   };
 };
 
