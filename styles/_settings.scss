@@ -37,7 +37,7 @@ $gutter: (
   large: 30px
 );
 $outer_padding: (
-  small: 60px / map-get($font_size, small) * map-get($font_size, large),
+  small: 40px / map-get($font_size, small) * map-get($font_size, large),
   large: 80px
 );
 

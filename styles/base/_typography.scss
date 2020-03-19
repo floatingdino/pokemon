@@ -10,14 +10,6 @@ html {
   margin: 0;
   background-color: s.$body;
   color: s.$dark;
-  background-image: url("/img/pikachu.png");
-  background-repeat: no-repeat;
-  background-size: auto 90%;
-  background-position: -195px bottom;
-  background-attachment: fixed;
-  @include foundation.breakpoint(medium) {
-    background-position: 40px bottom;
-  }
   @media (prefers-color-scheme: dark) {
     background-color: s.$dark;
     color: white;
@@ -27,6 +19,22 @@ html {
       font-size: $size;
       line-height: map-get(s.$line_height, $bp);
     }
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  left: -195px;
+  bottom: 0;
+  background-image: url("/img/pikachu.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left bottom;
+  height: 90%;
+  width: 110%;
+  @include foundation.breakpoint(medium) {
+    left: 40px;
   }
 }
 
