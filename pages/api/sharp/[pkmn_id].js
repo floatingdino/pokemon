@@ -1,11 +1,14 @@
 import fetch from "isomorphic-unfetch";
 import sharp from "sharp";
 
+const spriteEndpoint =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
 export default async (req, res) => {
   // TODO: error handling
   const params = req.query;
   const supportsWebp = req.headers.accept.indexOf("image/webp") >= 0;
-  const url = params.url;
+  const url = `${spriteEndpoint}${params.pkmn_id}.png`;
   const imgData = Buffer.from(await fetch(url).then(r => r.arrayBuffer()));
 
   res.statusCode = 200;
@@ -15,6 +18,7 @@ export default async (req, res) => {
   if (supportsWebp) {
     data = await sharp(imgData).webp({
       quality: 60,
+      nearLossless: true,
       alphaQuality: 10
     });
   } else {
