@@ -36,7 +36,7 @@ function Header({ router }) {
             </Link>
           </div>
           <div className="cell shrink">
-            <div className="hide-for-large">
+            <div className="hide-for-medium">
               <button
                 onClick={() => setOpen(!open)}
                 className="mobile-menu-opener"
@@ -50,10 +50,10 @@ function Header({ router }) {
               className={`main-nav ${(!open && "hidden") || ""}`}
               id="main-nav">
               <nav className={`grid-x grid-margin-x align-middle`}>
-                <div className="cell large-auto">
+                <div className="cell medium-auto">
                   <ul className="main-nav-list grid-x grid-margin-x">
                     {navItems.map(({ link, label }) => (
-                      <li key={link} className="cell large-shrink">
+                      <li key={link} className="cell medium-shrink">
                         <Link href={link}>
                           <a
                             className={
@@ -66,7 +66,7 @@ function Header({ router }) {
                     ))}
                   </ul>
                 </div>
-                <div className="cell large-shrink user-profile-cell">
+                <div className="cell medium-shrink user-profile-cell">
                   <div className="user-profile">
                     <img
                       src="/img/placeholder-user.png"

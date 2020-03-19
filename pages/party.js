@@ -44,7 +44,7 @@ export default class PartyView extends Component {
       party: this.party.party
     });
   }
-
+  // TODO: right sidebar
   render() {
     const { party } = this.state;
     return (
