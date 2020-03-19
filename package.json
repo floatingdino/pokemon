@@ -23,7 +23,11 @@
     "react": "^16.13.0",
     "react-contenteditable": "^3.3.3",
     "react-dom": "^16.13.0",
-    "sass": "^1.26.3"
+    "sass": "^1.26.3",
+    "sharp": "^0.25.1"
   },
-  "browserslist": ["defaults", "not IE 11"]
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
 }
