@@ -32,13 +32,16 @@ export default function Card({
         className={`card pkmn-card h-100 grid-y ${(active && "card-active") ||
           null} ${(name === undefined && "card-empty") || "card-not-empty"}`}>
         <div className="cell shrink">
-          <img
-            className="card-img"
-            src={image || defaultImage}
-            alt={name}
-            width="150"
-            height="150"
-          />
+          <picture>
+            <source srcSet={`${image}.webp`} type="image/webp" />
+            <img
+              className="card-img"
+              src={`${image}.png` || defaultImage}
+              alt={name}
+              width="150"
+              height="150"
+            />
+          </picture>
           {!inParty &&
             active && (
               <img
