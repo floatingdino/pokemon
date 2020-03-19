@@ -43,7 +43,7 @@ export default function Card({
             active && (
               <img
                 className="pokemon-capture"
-                src="/img/pokeball-capture.gif"
+                src={`/img/pokeball-capture.gif?${Date.now()}`}
                 aria-hidden="true"
                 alt=""
               />
