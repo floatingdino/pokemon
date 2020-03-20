@@ -24,7 +24,6 @@ module.exports = withOffline(
           handler: "CacheFirst",
           options: {
             cacheName: "https-calls",
-            networkTimeoutSeconds: 15,
             expiration: {
               maxEntries: 250,
               maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
