@@ -12,6 +12,7 @@ class MyDocument extends Document {
         <Head>
           <meta name="robots" content="noindex" />
           <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="manifest" href="/manifest.json" />
         </Head>
         <body>
           <Main />

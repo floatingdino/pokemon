@@ -12,6 +12,12 @@ img {
   max-width: 100%;
 }
 
+button {
+  border: none;
+  appearance: none;
+  background-color: transparent;
+}
+
 $spacing_rhythm: (
   small: 3px,
   large: 5px

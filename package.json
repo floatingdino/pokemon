@@ -26,8 +26,5 @@
     "sass": "^1.26.3",
     "sharp": "^0.25.1"
   },
-  "browserslist": [
-    "defaults",
-    "not IE 11"
-  ]
+  "browserslist": ["last 1 version", "not IE 11"]
 }

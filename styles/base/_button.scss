@@ -23,8 +23,6 @@
     font-weight: 700;
     box-shadow: s.$shadow;
     text-decoration: none;
-    border: none;
-    appearance: none;
     cursor: pointer;
     padding: 10px;
     @include foundation.breakpoint(medium) {
