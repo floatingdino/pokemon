@@ -2,5 +2,6 @@
   "background_color": "#333333",
   "theme_color": "#333333",
   "name": "Pokemon Team Builder",
-  "short_name": "PKMN Party"
+  "short_name": "PKMN Party",
+  "start_url": "/"
 }
