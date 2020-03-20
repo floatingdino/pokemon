@@ -41,6 +41,7 @@ export default function Card({
                 alt={name}
                 width="150"
                 height="150"
+                loading="lazy"
               />
             </picture>
           )) || (
@@ -50,6 +51,7 @@ export default function Card({
               width="150"
               height="150"
               className="card-img"
+              loading="lazy"
             />
           )}
           {!inParty &&
