@@ -5,10 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Warm Cache on site
-        uses: wei/curl@master
+        uses: wei/curl@v1
         with:
           args: https://pokemon.floatingdino.now.sh
-      - uses: wei/curl@master
+      - uses: wei/curl@v1
         with:
           args: https://pokemon.floatingdino.now.sh/party
       - uses: actions/checkout@v1
