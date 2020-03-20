@@ -16,11 +16,6 @@
     margin: 10px auto 0;
   }
 }
-.archive-left-column {
-  @include foundation.breakpoint(large) {
-    min-height: calc(100vh - 300px);
-  }
-}
 
 @include foundation.breakpoint(small down) {
   .archive-title-holder {

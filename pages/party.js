@@ -1,8 +1,11 @@
 import { Component } from "react";
+import Link from "next/link";
 
 import Party from "../services/party";
 import Layout from "../components/layout";
 import Card from "../components/card";
+
+import "./party.scss";
 
 const userName = "Ash";
 
@@ -53,9 +56,11 @@ export default class PartyView extends Component {
           <div className="grid-x grid-margin-x">
             <div className="cell large-1" />
             <div className="cell large-2">
-              <h1>
-                {userName}'s<br />Party
-              </h1>
+              <div className="archive-column grid-y align-center">
+                <h1>
+                  {userName}'s<br />Party
+                </h1>
+              </div>
             </div>
             <div className="cell large-6">
               <div className="grid-x grid-margin-x grid-margin-y">
@@ -68,6 +73,24 @@ export default class PartyView extends Component {
                     onClick={() => this.removeFromParty(mon.id)}
                   />
                 ))}
+              </div>
+            </div>
+            <div className="cell large-1" />
+            <div className="cell large-1">
+              <div className="archive-column grid-y">
+                <div className="cell auto text-center grid-y align-center">
+                  {this.party && (
+                    <div class="h3">
+                      <span className="show-for-sr">Party Size:</span>
+                      {this.party.realLength} / {this.party.maxMembers}
+                    </div>
+                  )}
+                </div>
+                <div className="cell shrink">
+                  <Link href="/">
+                    <a className="btn">Dex</a>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

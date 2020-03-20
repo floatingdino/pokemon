@@ -39,8 +39,7 @@ body::before {
 }
 
 h1,
-h2,
-h3 {
+h2 {
   font-family: s.$heading_family;
   font-style: normal;
   text-decoration: none;
@@ -62,6 +61,12 @@ h2 {
     font-size: (32 / 12) * 1rem;
     line-height: (37 / 32);
   }
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
 }
 
 .h1,

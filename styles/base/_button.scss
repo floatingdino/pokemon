@@ -38,9 +38,10 @@
     content: "";
     background-image: url("data:image/svg+xml,%3Csvg width='27' height='10' viewBox='0 0 27 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M24.1108 4.20025L20.9538 1.0433L21.9938 0.00329723L26.4062 4.41564C26.6934 4.70283 26.6934 5.16846 26.4062 5.45564L21.9938 9.86799L20.9538 8.82799L24.1108 5.67103L0.883057 5.67104L0.883057 4.20026L24.1108 4.20025Z' fill='white'/%3E%3C/svg%3E");
     height: 10px;
-    width: 25px;
+    width: 100%;
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
 }
 

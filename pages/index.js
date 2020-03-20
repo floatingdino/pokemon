@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Link from "next/link";
 
 import "./index.scss";
 
@@ -123,7 +122,7 @@ export default class Index extends Component {
           <div className="grid-x grid-margin-x">
             <div className="cell large-1" />
             <div className="cell large-2 archive-title-holder">
-              <div className="archive-left-column grid-y">
+              <div className="archive-column grid-y">
                 <div className="cell large-auto grid-x align-middle">
                   <h1>
                     Choose<br />your team
