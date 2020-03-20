@@ -33,6 +33,7 @@ body::before {
   background-position: left bottom;
   height: 90%;
   width: 150%;
+  pointer-events: none;
   @include foundation.breakpoint(medium) {
     left: 40px;
   }

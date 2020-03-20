@@ -3,6 +3,8 @@
 
 .btn {
   transition: background-color 0.3s;
+  position: relative;
+  z-index: 1;
   &,
   &:visited {
     display: flex;

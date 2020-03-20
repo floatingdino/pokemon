@@ -4,7 +4,13 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Warm Cache on site
+        uses: wei/curl@master
+        with:
+          args: https://pokemon.floatingdino.now.sh
+      - uses: wei/curl@master
+        with:
+          args: https://pokemon.floatingdino.now.sh/party
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v2
         with:

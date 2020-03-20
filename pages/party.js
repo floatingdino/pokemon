@@ -65,7 +65,7 @@ export default class PartyView extends Component {
                   </div>
                   <div className="cell shrink hide-for-large">
                     {this.party && (
-                      <p class="h3 mb-0">
+                      <p className="h3 mb-0">
                         <span className="show-for-sr">Party Size:</span>
                         {this.party.realLength} / {this.party.maxMembers}
                       </p>
@@ -92,7 +92,7 @@ export default class PartyView extends Component {
               <div className="archive-column grid-y">
                 <div className="cell large-auto show-for-large text-center grid-y align-center">
                   {this.party && (
-                    <p class="h3">
+                    <p className="h3">
                       <span className="show-for-sr">Party Size:</span>
                       {this.party.realLength} / {this.party.maxMembers}
                     </p>

@@ -41,7 +41,18 @@ export default class Index extends Component {
   }
 
   componentDidMount() {
-    this.initLoader();
+    if (!!window.requestIdleCallback) {
+      requestIdleCallback(
+        () => {
+          this.initLoader();
+        },
+        {
+          timeout: 5000
+        }
+      );
+    } else {
+      this.initLoader();
+    }
     // Only instantiate party on the client side (since it uses localStorage)
     if (typeof window !== "undefined") {
       this.party = new Party();
@@ -58,7 +69,10 @@ export default class Index extends Component {
       this.party.remove(id);
     } else {
       const [mon] = this.state.pokemon.filter(mon => mon.id === id);
-      this.party.add(mon);
+      this.party.add({
+        ...mon,
+        added: Date.now()
+      });
     }
 
     this.setState({
@@ -75,7 +89,7 @@ export default class Index extends Component {
     this.observer = new IntersectionObserver(
       entries => this.watchPaginationCallback(entries),
       {
-        rootMargin: "0px 0px 400px 0px"
+        rootMargin: "0px 0px 300px 0px"
       }
     );
 
