@@ -57,9 +57,21 @@ export default class PartyView extends Component {
             <div className="cell large-1" />
             <div className="cell large-2">
               <div className="archive-column grid-y align-center">
-                <h1>
-                  {userName}'s<br />Party
-                </h1>
+                <div className="grid-x align-middle">
+                  <div className="cell auto">
+                    <h1>
+                      {userName}'s<br />Party
+                    </h1>
+                  </div>
+                  <div className="cell shrink hide-for-large">
+                    {this.party && (
+                      <p class="h3 mb-0">
+                        <span className="show-for-sr">Party Size:</span>
+                        {this.party.realLength} / {this.party.maxMembers}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="cell large-6">
@@ -78,17 +90,17 @@ export default class PartyView extends Component {
             <div className="cell large-1" />
             <div className="cell large-1">
               <div className="archive-column grid-y">
-                <div className="cell auto text-center grid-y align-center">
+                <div className="cell large-auto show-for-large text-center grid-y align-center">
                   {this.party && (
-                    <div class="h3">
+                    <p class="h3">
                       <span className="show-for-sr">Party Size:</span>
                       {this.party.realLength} / {this.party.maxMembers}
-                    </div>
+                    </p>
                   )}
                 </div>
                 <div className="cell shrink">
                   <Link href="/">
-                    <a className="btn">Dex</a>
+                    <a className="btn btn-floating">Dex</a>
                   </Link>
                 </div>
               </div>
