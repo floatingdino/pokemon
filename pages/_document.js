@@ -13,6 +13,12 @@ class MyDocument extends Document {
           <meta name="robots" content="noindex" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />
+          <meta name="theme-color" content="#333" />
+          <link
+            rel="apple-touch-icon"
+            sizes="192x192"
+            href="/img/icon-192.png"
+          />
         </Head>
         <body>
           <Main />

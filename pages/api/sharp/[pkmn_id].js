@@ -32,7 +32,10 @@ export default async (req, res) => {
   }
 
   // 30 Day cache lifetime
-  res.setHeader("Cache-Control", "public, max-age=2592000, s-max-age=2592000");
+  res.setHeader(
+    "Cache-Control",
+    "public, max-age=2592000, s-max-age=2592000, stale-while-revalidate"
+  );
 
   res.setHeader(
     "Content-Type",
