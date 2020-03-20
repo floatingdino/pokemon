@@ -11,6 +11,7 @@ jobs:
       - uses: wei/curl@master
         with:
           args: https://pokemon.floatingdino.now.sh/party
+      - uses: actions/checkout@v1
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v2
         with:
