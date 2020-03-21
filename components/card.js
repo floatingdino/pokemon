@@ -30,7 +30,7 @@ export default function Card({
         )}
       <div
         className={`card pkmn-card h-100 grid-y ${(active && "card-active") ||
-          null} ${(name === undefined && "card-empty") || "card-not-empty"}`}>
+          ""} ${(name === undefined && "card-empty") || "card-not-empty"}`}>
         <div className="cell shrink">
           {(image && (
             <picture>

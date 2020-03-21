@@ -57,7 +57,7 @@ function Header({ router }) {
                         <Link href={link}>
                           <a
                             className={
-                              (router.pathname === link && "active") || null
+                              (router.pathname === link && "active") || ""
                             }>
                             {label}
                           </a>
