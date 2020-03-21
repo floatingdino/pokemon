@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Head from "next/head";
 
 import "./index.scss";
 
@@ -137,9 +136,6 @@ export default class Index extends Component {
     const { maxPokemon } = this.props;
     return (
       <Layout>
-        <Head>
-          <link rel="prefetch" href="/img/pokeball-loader.gif" />
-        </Head>
         <div className="grid-container">
           <div className="grid-x grid-margin-x">
             <div className="cell large-1" />
