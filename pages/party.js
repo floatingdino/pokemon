@@ -5,14 +5,11 @@ import Party from "../services/party";
 import Layout from "../components/layout";
 import Card from "../components/card";
 
-import "./party.scss";
-
 const userName = "Ash";
 
 export default class PartyView extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       party: [
         { id: "empty-1" },
@@ -26,6 +23,7 @@ export default class PartyView extends Component {
   }
 
   componentDidMount() {
+    // This update is in componentDidMount so that React doesn't complain on hydration
     if (typeof window !== "undefined") {
       this.party = new Party();
       this.setState({
@@ -47,7 +45,6 @@ export default class PartyView extends Component {
       party: this.party.party
     });
   }
-  // TODO: right sidebar
   render() {
     const { party } = this.state;
     return (

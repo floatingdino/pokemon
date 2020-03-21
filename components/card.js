@@ -54,7 +54,8 @@ export default function Card({
               loading="lazy"
             />
           )}
-          {!inParty &&
+          {// Sprites from https://www.deviantart.com/anarlaurendil/art/All-Pokeball-Sprites-for-throw-animation-815730891
+          !inParty &&
             active && (
               <img
                 className="pokemon-capture"
