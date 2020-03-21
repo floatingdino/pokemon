@@ -13,7 +13,8 @@ export default function Card({
   inParty,
   onClick,
   image,
-  onChange
+  onChange,
+  added
 }) {
   return (
     <article className={`cell large-4 small-6 text-center card-holder`}>
@@ -59,7 +60,7 @@ export default function Card({
             active && (
               <img
                 className="pokemon-capture"
-                src={`/img/pokeball-capture.gif?${Date.now()}`}
+                src={`/img/pokeball-capture.gif?${added || Date.now()}`}
                 aria-hidden="true"
                 alt=""
               />

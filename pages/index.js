@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Head from "next/head";
 
 import "./index.scss";
 
@@ -33,6 +34,7 @@ export default class Index extends Component {
 
     this.state = {
       active: [],
+      activeTimes: [],
       party: [],
       page: 1,
       pokemon: props.pokemon,
@@ -59,6 +61,7 @@ export default class Index extends Component {
       this.party = new Party();
       this.setState({
         active: this.party.party.map(mon => mon.id),
+        activeTimes: this.party.party.map(mon => mon.added || Date.now()),
         party: this.party.party
       });
     }
@@ -78,6 +81,7 @@ export default class Index extends Component {
 
     this.setState({
       active: this.party.party.map(mon => mon.id),
+      activeTimes: this.party.party.map(mon => mon.added || Date.now()),
       party: this.party.party
     });
   }
@@ -129,10 +133,13 @@ export default class Index extends Component {
   }
 
   render() {
-    const { active, pokemon, party, fetching } = this.state;
+    const { active, activeTimes, pokemon, party, fetching } = this.state;
     const { maxPokemon } = this.props;
     return (
       <Layout>
+        <Head>
+          <link rel="prefetch" href="/img/pokeball-loader.gif" />
+        </Head>
         <div className="grid-container">
           <div className="grid-x grid-margin-x">
             <div className="cell large-1" />
@@ -176,14 +183,18 @@ export default class Index extends Component {
             </div>
             <div className="cell large-6">
               <div className="grid-x grid-margin-x grid-margin-y align-stretch">
-                {pokemon.map(mon => (
-                  <Card
-                    key={mon.id}
-                    {...mon}
-                    active={active.indexOf(mon.id) >= 0}
-                    onClick={() => this.toggleCardActive(mon.id)}
-                  />
-                ))}
+                {pokemon.map(mon => {
+                  const activeIndex = active.indexOf(mon.id);
+                  return (
+                    <Card
+                      key={mon.id}
+                      {...mon}
+                      active={activeIndex >= 0}
+                      added={activeIndex >= 0 && activeTimes[activeIndex]}
+                      onClick={() => this.toggleCardActive(mon.id)}
+                    />
+                  );
+                })}
                 <div
                   className="cell pagination-indicator text-center"
                   ref={this.paginationDOM}>
@@ -207,18 +218,6 @@ export default class Index extends Component {
             </div>
           </div>
         </div>
-        <img
-          className="capture-asset-preloader"
-          src="/img/pokeball-capture.gif"
-          alt=""
-          style={{ display: "none" }}
-        />
-        <img
-          className="pokeball-loader-preloader"
-          src="/img/pokeball-loader.gif"
-          alt=""
-          style={{ display: "none" }}
-        />
       </Layout>
     );
   }
