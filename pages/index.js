@@ -54,6 +54,7 @@ export default class Index extends Component {
       this.initLoader();
     }
     // Only instantiate party on the client side (since it uses localStorage)
+    // This update is in componentDidMount so that React doesn't complain on hydration
     if (typeof window !== "undefined") {
       this.party = new Party();
       this.setState({
@@ -128,7 +129,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { active, pokemon, party } = this.state;
+    const { active, pokemon, party, fetching } = this.state;
     const { maxPokemon } = this.props;
     return (
       <Layout>
@@ -186,6 +187,16 @@ export default class Index extends Component {
                 <div
                   className="cell pagination-indicator text-center"
                   ref={this.paginationDOM}>
+                  {fetching && (
+                    <div>
+                      <img
+                        className="pokeball-loader"
+                        src="/img/pokeball-loader.gif"
+                        alt="Pokeball rocking"
+                        title="Loading..."
+                      />
+                    </div>
+                  )}
                   {pokemon.length}/{maxPokemon}
                 </div>
               </div>

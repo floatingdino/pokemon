@@ -16,6 +16,14 @@
     margin: 10px auto 0;
   }
 }
+.pokeball-loader {
+  width: 66px;
+  height: 66px;
+  image-rendering: pixelated;
+  @supports (image-rendering: crisp-edges) {
+    image-rendering: crisp-edges;
+  }
+}
 
 @include foundation.breakpoint(small down) {
   .archive-title-holder {
