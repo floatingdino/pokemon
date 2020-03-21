@@ -213,6 +213,12 @@ export default class Index extends Component {
           alt=""
           style={{ display: "none" }}
         />
+        <img
+          className="pokeball-loader-preloader"
+          src="/img/pokeball-loader.gif"
+          alt=""
+          style={{ display: "none" }}
+        />
       </Layout>
     );
   }
