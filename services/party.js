@@ -1,8 +1,12 @@
+import { maxPartySize } from "../constants";
+
 export default class Party {
-  maxMembers = 6;
+  maxMembers = maxPartySize;
 
   party = [];
 
+  // Keep track of the number of actual pokemon in the party, because
+  // we're going to be filling up to the max with empty objects
   realLength = 0;
 
   storageKey = "party";

@@ -1,10 +1,13 @@
 import fetch from "isomorphic-unfetch";
 
-const generationEndpoint = "https://pokeapi.co/api/v2/generation/1";
-const pokemonEndpoint = "https://pokeapi.co/api/v2/pokemon/";
+import {
+  externalGenerationEndpoint as generationEndpoint,
+  externalPokemonEndpoint as pokemonEndpoint,
+  defaultCacheAge
+} from "../../constants";
 
 export async function getGeneration() {
-  const rr = await fetch(generationEndpoint, { cache: "force-cache" });
+  const rr = await fetch(generationEndpoint);
   const generation = await rr.json();
 
   const idRegex = /\/(\d{1,3})\//;
@@ -29,7 +32,10 @@ export default async (req, res) => {
   res.setHeader("Content-Type", "application/json");
 
   // 30 Day cache lifetime
-  res.setHeader("Cache-Control", "public, max-age=2592000, s-max-age=2592000");
+  res.setHeader(
+    "Cache-Control",
+    `public, max-age=${defaultCacheAge}, s-max-age=${defaultCacheAge}`
+  );
 
   res.end(JSON.stringify(allPokemon));
 };

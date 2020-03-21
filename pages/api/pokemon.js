@@ -1,7 +1,11 @@
 import fetch from "isomorphic-unfetch";
 import { getGeneration } from "./generation";
 
-const defaultPageSize = 12;
+import {
+  defaultPageSize,
+  localImageEndpoint,
+  defaultCacheAge
+} from "../../constants";
 
 const titleCase = term => {
   const words = term
@@ -25,7 +29,7 @@ const stripPokemonData = mon => {
         url: type.url
       };
     }),
-    image: `/api/sharp/${mon.id}`,
+    image: `${localImageEndpoint}/${mon.id}`,
     sprite: mon.sprites?.front_default
   };
 };
@@ -71,7 +75,7 @@ export default async (req, res) => {
   // 30 Day cache lifetime
   res.setHeader(
     "Cache-Control",
-    "public, max-age=2592000, s-max-age=2592000, stale-while-revalidate"
+    `public, max-age=${defaultCacheAge}, s-max-age=${defaultCacheAge}, stale-while-revalidate`
   );
 
   res.end(JSON.stringify(pokemon));

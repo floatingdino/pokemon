@@ -5,7 +5,7 @@ import Party from "../services/party";
 import Layout from "../components/layout";
 import Card from "../components/card";
 
-const userName = "Ash";
+import { userName } from "../constants";
 
 export default class PartyView extends Component {
   constructor(props) {
