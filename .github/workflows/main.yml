@@ -18,5 +18,4 @@ jobs:
           urls: |
             https://pokemon.floatingdino.now.sh
             https://pokemon.floatingdino.now.sh/party
-          temporaryPublicStorage: true
           configPath: 'lighthouserc.json'
